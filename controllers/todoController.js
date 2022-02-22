@@ -2,12 +2,12 @@ const { Todo } = require('../models');
 
 
 module.exports.listAll = async function(req, res) {
-    const todos = await Todo.findAll();
+    const todo = await Todo.findAll();
 
-    let completeItems = todos.filter(item => item.complete);
-    let incompleteItems = todos.filter(item => !item.complete);
+    let completeItems = todo.filter(item => item.complete);
+    let incompleteItems = todo.filter(item => !item.complete);
 
-    res.render('todos/viewAll', {
+    res.render('todo/viewAll', {
         completeItems,
         incompleteItems
     });
@@ -19,7 +19,7 @@ module.exports.displayAddItem = function(req, res) {
         name: '',
         description: '',
     }
-    res.render('todos/newItem', {
+    res.render('todo/newItem', {
         item
     })
 };
@@ -32,7 +32,7 @@ module.exports.addNewItem = async function(req, res){
 
 module.exports.viewEditItem = async function(req, res) {
     const todo = await Todo.findByPk(req.params.id);
-    res.render('todos/editItem', {item: todo})
+    res.render('todo/editItem', {item: todo})
 };
 
 
